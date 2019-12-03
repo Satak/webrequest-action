@@ -15,4 +15,7 @@ jobs:
           secret: ${{ secrets.MY_SECRET }}
       # Use the output from the `hello` step
       - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+        shell: pwsh
+        run: |
+          $time = ${{ steps.hello.outputs.time }}
+          Write-Host "Time from output $time"
