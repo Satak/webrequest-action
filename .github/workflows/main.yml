@@ -12,7 +12,7 @@ jobs:
         with:
           who-to-greet: ${{ MY_NAME }}
           secret: ${{ secrets.MY_SECRET }}
-          webhook-id: ${{ steps.hello.env.MY_NAME }}
+          webhook-id: ${MY_NAME}
         env:
           MY_NAME: Satak the great
       # Use the output from the `hello` step
