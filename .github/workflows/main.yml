@@ -1,6 +1,4 @@
 on: [push]
-env:
-  WEBHOOK_ID: 8333e2d2-80bb-4bc2-924d-e2c007095181
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
@@ -14,7 +12,7 @@ jobs:
         with:
           who-to-greet: 'Satak the master'
           secret: ${{ secrets.MY_SECRET }}
-          webhook-id: ${WEBHOOK_ID}
+          webhook-id: ${{ secrets.WEBHOOK_ID }}
       # Use the output from the `hello` step
       - name: Get the output time
         shell: pwsh
