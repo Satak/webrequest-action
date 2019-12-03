@@ -17,5 +17,5 @@ jobs:
       - name: Get the output time
         shell: pwsh
         run: |
-          $time = "${{ steps.hello.outputs.time }}"
-          Write-Host "Time from output $time"
+          $output = "${{ steps.hello.outputs.output }}" | ConvertFrom-Json
+          Write-Host "Time from output $($output.time)"

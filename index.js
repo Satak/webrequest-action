@@ -10,11 +10,12 @@ try {
     secret: secret
   };
   // console.log(`Hello ${nameToGreet} with secret ${secret}`);
-  const outputJSON = JSON.stringify(inputObject, undefined, 2);
-  console.log(outputJSON);
+  const consoleOutputJSON = JSON.stringify(inputObject, undefined, 2);
+  console.log(consoleOutputJSON);
 
   const time = new Date().toTimeString();
-  core.setOutput("time", time);
+  const outputJSON = JSON.stringify({ time: time });
+  core.setOutput("output", outputJSON);
   // Get the JSON webhook payload for the event that triggered the workflow
   // const payload = JSON.stringify(github.context.payload, undefined, 2);
   // console.log(`The event payload: ${payload}`);
