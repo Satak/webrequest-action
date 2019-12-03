@@ -1,16 +1,19 @@
-name: "Hello Action"
-description: "Greet someone and record the time"
+name: 'Hello Action'
+description: 'Greet someone and record the time'
 inputs:
   who-to-greet:
-    description: "Who to greet"
+    description: 'Who to greet'
     required: true
-    default: "World"
+    default: 'World'
   secret:
-    description: "Your secret input"
+    description: 'Your secret input'
+    required: true
+  webhook-id:
+    description: 'Unique webhook.site ID'
     required: true
 outputs:
   time:
-    description: "The time we greeted you"
+    description: 'The time we greeted you'
 runs:
-  using: "node12"
-  main: "dist/index.js"
+  using: 'node12'
+  main: 'dist/index.js'
