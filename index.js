@@ -21,19 +21,20 @@ try {
 
   const inputObject = {
     name: nameToGreet,
-    secret: secret,
-    webhookId: webhookId
+    secret: secret
   };
 
-  const payload = {
-    name: nameToGreet
-  };
   // console.log(`Hello ${nameToGreet} with secret ${secret}`);
   const consoleOutputJSON = JSON.stringify(inputObject, undefined, 2);
   console.log(consoleOutputJSON);
 
+  const payload = {
+    name: nameToGreet
+  };
+
   // http request to external API
   const statusCode = webhookCall(webhookId, payload);
+  console.log('statusCode', statusCode);
   const time = new Date().toTimeString();
   const outputObject = {
     time: time,
