@@ -12050,16 +12050,17 @@ try {
   };
 
   // http request to external API
-  const statusCode = webhookCall(webhookId, payload);
-  console.log('statusCode', statusCode);
-  const time = new Date().toTimeString();
-  const outputObject = {
-    time: time,
-    name: nameToGreet,
-    statusCode: statusCode
-  };
-  const outputJSON = JSON.stringify(outputObject);
-  core.setOutput('output', outputJSON);
+  webhookCall(webhookId, payload).then(res => {
+    const time = new Date().toTimeString();
+    const outputObject = {
+      time: time,
+      name: nameToGreet,
+      statusCode: res
+    };
+    const outputJSON = JSON.stringify(outputObject);
+    core.setOutput('output', outputJSON);
+  });
+
   // Get the JSON webhook payload for the event that triggered the workflow
   // const payload = JSON.stringify(github.context.payload, undefined, 2);
   // console.log(`The event payload: ${payload}`);
