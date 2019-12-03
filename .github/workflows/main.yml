@@ -5,8 +5,6 @@ jobs:
   hello_world_job:
     runs-on: ubuntu-latest
     name: A job to say hello
-    env:
-      MY_NAME: Satak the great
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -17,8 +15,6 @@ jobs:
           who-to-greet: ${{ env.MY_NAME }}
           secret: ${{ secrets.MY_SECRET }}
           webhook-id: ${{ secrets.WEBHOOK_ID }}
-        env:
-          MY_NAME: Satak the great
       # Use the output from the `hello` step
       - name: Get the output time
         shell: pwsh
