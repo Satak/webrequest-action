@@ -9439,7 +9439,11 @@ try {
   console.log(consoleOutputJSON);
 
   const time = new Date().toTimeString();
-  const outputJSON = JSON.stringify({ time: time });
+  const outputObject = {
+    time: time,
+    name: nameToGreet
+  };
+  const outputJSON = JSON.stringify(outputObject);
   core.setOutput("output", outputJSON);
   // Get the JSON webhook payload for the event that triggered the workflow
   // const payload = JSON.stringify(github.context.payload, undefined, 2);
