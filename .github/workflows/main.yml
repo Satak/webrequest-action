@@ -12,6 +12,7 @@ jobs:
         uses: satak/hello-action@master
         with:
           who-to-greet: "Satak the master"
+          secret: ${{ secrets.MY_SECRET }}
       # Use the output from the `hello` step
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"

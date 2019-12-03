@@ -20,4 +20,13 @@ The time we greeted you.
 uses: satak/hello-action@master
 with:
   who-to-greet: "<your name>"
+  secret: ${{ secrets.MY_SECRET }}
 ```
+
+## Documentation
+
+How to create your custom GitHub action:
+<https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-a-javascript-action>
+
+- How to compile your `index.js` file:
+  - `ncc build index.js`
