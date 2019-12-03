@@ -13,40 +13,43 @@ async function webhookCall(webhookId, payload) {
   }
 }
 
-try {
-  // `who-to-greet` input defined in action metadata file
-  const nameToGreet = core.getInput('who-to-greet');
-  const secret = core.getInput('secret');
-  const webhookId = core.getInput('webhook-id');
+async function main() {
+  try {
+    // `who-to-greet` input defined in action metadata file
+    const nameToGreet = core.getInput('who-to-greet');
+    const secret = core.getInput('secret');
+    const webhookId = core.getInput('webhook-id');
 
-  const inputObject = {
-    name: nameToGreet,
-    secret: secret
-  };
+    const inputObject = {
+      name: nameToGreet,
+      secret: secret
+    };
 
-  // console.log(`Hello ${nameToGreet} with secret ${secret}`);
-  const consoleOutputJSON = JSON.stringify(inputObject, undefined, 2);
-  console.log(consoleOutputJSON);
+    // console.log(`Hello ${nameToGreet} with secret ${secret}`);
+    const consoleOutputJSON = JSON.stringify(inputObject, undefined, 2);
+    console.log(consoleOutputJSON);
 
-  const payload = {
-    name: nameToGreet
-  };
+    const payload = {
+      name: nameToGreet
+    };
 
-  // http request to external API
-  webhookCall(webhookId, payload).then(res => {
+    // http request to external API
+    const statusCode = await webhookCall(webhookId, payload);
     const time = new Date().toTimeString();
     const outputObject = {
       time: time,
       name: nameToGreet,
-      statusCode: res
+      statusCode: statusCode
     };
     const outputJSON = JSON.stringify(outputObject);
     core.setOutput('output', outputJSON);
-  });
 
-  // Get the JSON webhook payload for the event that triggered the workflow
-  // const payload = JSON.stringify(github.context.payload, undefined, 2);
-  // console.log(`The event payload: ${payload}`);
-} catch (error) {
-  core.setFailed(error.message);
+    // Get the JSON webhook payload for the event that triggered the workflow
+    // const payload = JSON.stringify(github.context.payload, undefined, 2);
+    // console.log(`The event payload: ${payload}`);
+  } catch (error) {
+    core.setFailed(error.message);
+  }
 }
+
+main();
