@@ -1,22 +1,16 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const request = require('request');
+const axios = require('axios');
 
-function API(webhookId, payload) {
+async function webhookCall(webhookId, payload) {
   const url = `https://webhook.site/${webhookId}`;
-  console.log(url);
-  const options = {
-    uri: url,
-    method: 'POST',
-    json: payload
-  };
-  request(options, (err, res, body) => {
-    if (err) {
-      return console.log(err);
-    }
-    console.log(res.statusCode);
-    return res.statusCode;
-  });
+  try {
+    const response = await axios.post(url, payload);
+    console.log('Webhook statuscode:', response.status);
+    return response.status;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 try {
@@ -39,7 +33,7 @@ try {
   console.log(consoleOutputJSON);
 
   // http request to external API
-  const statusCode = API(webhookId, payload);
+  const statusCode = webhookCall(webhookId, payload);
   const time = new Date().toTimeString();
   const outputObject = {
     time: time,
