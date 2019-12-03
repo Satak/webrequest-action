@@ -10,9 +10,11 @@ jobs:
         id: hello
         uses: satak/hello-action@master
         with:
-          who-to-greet: 'Satak the master'
+          who-to-greet: ${{ env.MY_NAME }}
           secret: ${{ secrets.MY_SECRET }}
           webhook-id: ${{ secrets.WEBHOOK_ID }}
+        env:
+          MY_NAME: Satak the great
       # Use the output from the `hello` step
       - name: Get the output time
         shell: pwsh
