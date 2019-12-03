@@ -1,8 +1,12 @@
 on: [push]
+env:
+  MY_NAME: Satak the great
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
     name: A job to say hello
+    env:
+      MY_NAME: Satak the great
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -10,7 +14,7 @@ jobs:
         id: hello
         uses: satak/hello-action@master
         with:
-          who-to-greet: $MY_NAME
+          who-to-greet: ${{ env.MY_NAME }}
           secret: ${{ secrets.MY_SECRET }}
           webhook-id: ${{ secrets.WEBHOOK_ID }}
         env:
