@@ -16,13 +16,16 @@ async function webhookCall(webhookId, payload) {
 async function main() {
   try {
     // `who-to-greet` input defined in action metadata file
-    const nameToGreet = core.getInput('who-to-greet');
+    const inputPerson = core.getInput('who-to-greet');
+    const nameToGreet = inputPerson.name;
+    const age = inputPerson.age;
     const secret = core.getInput('secret');
     const webhookId = core.getInput('webhook-id');
 
     const inputObject = {
       name: nameToGreet,
-      secret: secret
+      secret: secret,
+      age: age
     };
 
     // console.log(`Hello ${nameToGreet} with secret ${secret}`);

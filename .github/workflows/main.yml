@@ -12,7 +12,9 @@ jobs:
         id: hello
         uses: satak/hello-action@master
         with:
-          who-to-greet: ${{ env.MY_NAME }}
+          who-to-greet:
+            name: ${{ env.MY_NAME }}
+            age: 30
           secret: ${{ secrets.MY_SECRET }}
           webhook-id: ${{ secrets.WEBHOOK_ID }}
       # Use the output from the `hello` step
