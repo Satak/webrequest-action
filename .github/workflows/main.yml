@@ -14,7 +14,7 @@ jobs:
         with:
           who-to-greet: 'Satak the master'
           secret: ${{ secrets.MY_SECRET }}
-          webhook-id: $WEBHOOK_ID
+          webhook-id: ${WEBHOOK_ID}
       # Use the output from the `hello` step
       - name: Get the output time
         shell: pwsh

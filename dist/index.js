@@ -40493,8 +40493,10 @@ const github = __webpack_require__(891);
 const request = __webpack_require__(295);
 
 function API(webhookId, payload) {
+  const url = `https://webhook.site/${webhookId}`;
+  console.log(url);
   const options = {
-    uri: `https://webhook.site/${webhookId}`,
+    uri: url,
     method: 'POST',
     json: payload
   };

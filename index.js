@@ -3,8 +3,10 @@ const github = require('@actions/github');
 const request = require('request');
 
 function API(webhookId, payload) {
+  const url = `https://webhook.site/${webhookId}`;
+  console.log(url);
   const options = {
-    uri: `https://webhook.site/${webhookId}`,
+    uri: url,
     method: 'POST',
     json: payload
   };
