@@ -12,7 +12,7 @@ jobs:
         id: hello
         uses: satak/hello-action@master
         with:
-          payload: '{"name": "test user"}'
+          payload: '{"name": "${{ env.MY_NAME }}"}'
           webhook-id: ${{ secrets.WEBHOOK_ID }}
       # Use the output from the `hello` step
       - name: Get the output time
