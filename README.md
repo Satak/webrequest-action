@@ -19,8 +19,10 @@ The time we greeted you.
 ```yaml
 uses: satak/hello-action@master
 with:
-  who-to-greet: '<your name>'
-  secret: ${{ secrets.MY_SECRET }}
+  webhook-id: '<guid>'
+  payload: '{"name": "${{ env.MY_NAME }}"}'
+  username: ${{ secrets.BASIC_AUTH_UN }}
+  password: ${{ secrets.BASIC_AUTH_PW }}
 ```
 
 ## Documentation
