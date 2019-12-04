@@ -1,26 +1,25 @@
 {
-  "name": "hello-action",
+  "name": "webrequest-action",
   "version": "1.0.0",
-  "description": "GitHub hello action",
+  "description": "This action makes a web request to any JSON API. Supports all HTTP methods, JSON payload and basic authentication.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Satak/hello-action.git"
+    "url": "git+https://github.com/Satak/webrequest-action.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Satak/hello-action/issues"
+    "url": "https://github.com/Satak/webrequest-action/issues"
   },
-  "homepage": "https://github.com/Satak/hello-action#readme",
+  "homepage": "https://github.com/Satak/webrequest-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.0",
     "@actions/github": "^1.1.0",
-    "axios": "^0.19.0",
-    "request": "^2.88.0"
+    "axios": "^0.19.0"
   }
 }
