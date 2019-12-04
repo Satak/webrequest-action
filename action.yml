@@ -1,5 +1,7 @@
 name: 'Web Request Action'
 description: 'Send Web Request'
+icon: arrow-right-circle
+color: gray-dark
 inputs:
   url:
     description: 'Web request URL endpoint'
