@@ -13,6 +13,19 @@ This action makes a web request to any JSON API. Supports all HTTP methods, JSON
 | `username` | `false`  | Basic auth username                                |
 | `password` | `false`  | Basic auth password                                |
 
+## Example usage
+
+```yaml
+uses: satak/webrequest-action@master
+with:
+  url: https://webhook.site/${{ secrets.WEBHOOK_ID }}
+  method: POST
+  payload: '{"name": "${{ env.MY_NAME }}"}'
+  headers: '{"Authentication": "Token ${{ env.TOKEN }}"}'
+  username: ${{ secrets.BASIC_AUTH_UN }}
+  password: ${{ secrets.BASIC_AUTH_PW }}
+```
+
 ## Outputs
 
 Output format: `JSON`
@@ -36,27 +49,3 @@ run: |
   $output = '${{ steps.webhook.outputs.output }}' | ConvertFrom-Json
   Write-Host "Time from output $($output.time) statusCode $($output.statusCode)"
 ```
-
-## Example usage
-
-```yaml
-uses: satak/webrequest-action@master
-with:
-  url: https://webhook.site/${{ secrets.WEBHOOK_ID }}
-  method: POST
-  payload: '{"name": "${{ env.MY_NAME }}"}'
-  headers: '{"Authentication": "Token ${{ env.TOKEN }}"}'
-  username: ${{ secrets.BASIC_AUTH_UN }}
-  password: ${{ secrets.BASIC_AUTH_PW }}
-```
-
-## Documentation
-
-How to create your custom GitHub action:
-
-<https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-a-javascript-action>
-
-- How to compile your `index.js` file:
-  - install node
-  - install ncc globally wih npm: `npm i -g @zeit/ncc`
-  - run `ncc build index.js`
