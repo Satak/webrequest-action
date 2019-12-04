@@ -11,6 +11,9 @@ inputs:
   payload:
     description: Web request payload in JSON format
     required: false
+  headers:
+    description: Web request headers in JSON format
+    required: false
   username:
     description: username for BASIC auth
     required: false

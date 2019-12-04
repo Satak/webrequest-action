@@ -2,10 +2,11 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const axios = require('axios');
 
-async function webrequest(url, method, payload, username, password) {
+async function webrequest(url, method, payload, headers, username, password) {
   const auth = username && password ? { username, password } : null;
   const config = {
-    auth
+    auth,
+    headers
   };
   try {
     let response = null;
@@ -32,6 +33,8 @@ async function main() {
     const method = methodInput.toLowerCase();
     const payloadInput = core.getInput('payload');
     const payload = payloadInput ? JSON.parse(payloadInput) : null;
+    const headersInput = core.getInput('headers');
+    const headers = headersInput ? JSON.parse(headersInput) : null;
     const username = core.getInput('username');
     const password = core.getInput('password');
 
@@ -39,7 +42,7 @@ async function main() {
     const time = new Date().toTimeString();
 
     // http request to external API
-    const statusCode = await webrequest(url, method, payload, username, password);
+    const statusCode = await webrequest(url, method, payload, headers, username, password);
 
     const outputObject = {
       url,

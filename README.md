@@ -9,6 +9,7 @@ This action makes a web request to any JSON API. Supports all HTTP methods, JSON
 | `url`      | `true`   | Web request URL endpoint                           |
 | `method`   | `true`   | Web request method (`GET`, `POST`, `PUT`, `PATCH`) |
 | `payload`  | `false`  | Web request payload in JSON format                 |
+| `headers`  | `false`  | Web request headers in JSON format                 |
 | `username` | `false`  | Basic auth username                                |
 | `password` | `false`  | Basic auth password                                |
 
@@ -44,6 +45,7 @@ with:
   url: https://webhook.site/${{ secrets.WEBHOOK_ID }}
   method: POST
   payload: '{"name": "${{ env.MY_NAME }}"}'
+  headers: '{"Authentication": "Token ${{ env.TOKEN }}"}'
   username: ${{ secrets.BASIC_AUTH_UN }}
   password: ${{ secrets.BASIC_AUTH_PW }}
 ```
