@@ -12,12 +12,11 @@ jobs:
         id: hello
         uses: satak/hello-action@master
         with:
-          who-to-greet: ${{ env.MY_NAME }}
-          secret: ${{ secrets.MY_SECRET }}
+          payload: '{"name": "test user"}'
           webhook-id: ${{ secrets.WEBHOOK_ID }}
       # Use the output from the `hello` step
       - name: Get the output time
         shell: pwsh
         run: |
           $output = '${{ steps.hello.outputs.output }}' | ConvertFrom-Json
-          Write-Host "Time from output $($output.time) name $($output.name) statusCode $($output.statusCode)"
+          Write-Host "Time from output $($output.time) statusCode $($output.statusCode)"

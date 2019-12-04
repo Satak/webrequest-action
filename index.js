@@ -15,33 +15,27 @@ async function webhookCall(webhookId, payload) {
 
 async function main() {
   try {
-    // `who-to-greet` input defined in action metadata file
-    const nameToGreet = core.getInput('who-to-greet');
-    const secret = core.getInput('secret');
+    // inputs from action
     const webhookId = core.getInput('webhook-id');
+    const payload = JSON.parse(core.getInput('payload'));
 
-    const inputObject = {
-      name: nameToGreet,
-      secret: secret
-    };
-
-    // console.log(`Hello ${nameToGreet} with secret ${secret}`);
-    const consoleOutputJSON = JSON.stringify(inputObject, undefined, 2);
-    console.log(consoleOutputJSON);
-
-    const payload = {
-      name: nameToGreet
-    };
+    // current time
+    const time = new Date().toTimeString();
 
     // http request to external API
     const statusCode = await webhookCall(webhookId, payload);
-    const time = new Date().toTimeString();
-    const outputObject = {
+
+    const inputObject = {
+      webhookId: webhookId,
+      payload: payload,
       time: time,
-      name: nameToGreet,
       statusCode: statusCode
     };
-    const outputJSON = JSON.stringify(outputObject);
+
+    const consoleOutputJSON = JSON.stringify(inputObject, undefined, 2);
+    console.log(consoleOutputJSON);
+
+    const outputJSON = JSON.stringify(inputObject);
     core.setOutput('output', outputJSON);
 
     // Get the JSON webhook payload for the event that triggered the workflow

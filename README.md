@@ -19,7 +19,7 @@ The time we greeted you.
 ```yaml
 uses: satak/hello-action@master
 with:
-  who-to-greet: "<your name>"
+  who-to-greet: '<your name>'
   secret: ${{ secrets.MY_SECRET }}
 ```
 
@@ -29,4 +29,6 @@ How to create your custom GitHub action:
 <https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-a-javascript-action>
 
 - How to compile your `index.js` file:
-  - `ncc build index.js`
+  - install node
+  - install ncc globally wih npm: `npm i -g @zeit/ncc`
+  - run `ncc build index.js`
