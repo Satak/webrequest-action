@@ -12,8 +12,9 @@ jobs:
         id: webhook
         uses: satak/hello-action@master
         with:
+          url: https://webhook.site/${{ secrets.WEBHOOK_ID }}
+          method: POST
           payload: '{"name": "${{ env.MY_NAME }}"}'
-          webhook-id: ${{ secrets.WEBHOOK_ID }}
           username: ${{ secrets.BASIC_AUTH_UN }}
           password: ${{ secrets.BASIC_AUTH_PW }}
       - name: Get the output
