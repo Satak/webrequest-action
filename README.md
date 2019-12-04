@@ -19,14 +19,14 @@ with:
 
 ## Inputs
 
-| Parameter  | Required | Info                                               |
-| ---------- | -------- | -------------------------------------------------- |
-| `url`      | `true`   | Web request URL endpoint                           |
-| `method`   | `true`   | Web request method (`GET`, `POST`, `PUT`, `PATCH`) |
-| `payload`  | `false`  | Web request payload in JSON format                 |
-| `headers`  | `false`  | Web request headers in JSON format                 |
-| `username` | `false`  | Basic auth username                                |
-| `password` | `false`  | Basic auth password                                |
+| Parameter  | Required | Info                                                         |
+| ---------- | -------- | ------------------------------------------------------------ |
+| `url`      | `true`   | Web request URL endpoint                                     |
+| `method`   | `true`   | Web request method (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`) |
+| `payload`  | `false`  | Web request payload in JSON format                           |
+| `headers`  | `false`  | Web request headers in JSON format                           |
+| `username` | `false`  | Basic auth username                                          |
+| `password` | `false`  | Basic auth password                                          |
 
 ## Outputs
 

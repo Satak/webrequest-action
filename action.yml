@@ -9,7 +9,7 @@ inputs:
     description: 'Web request URL endpoint'
     required: true
   method:
-    description: 'Web request method (`GET`, `POST`, `PUT`, `PATCH`)'
+    description: 'Web request method (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`)'
     required: true
     default: GET
   payload:

@@ -16,6 +16,8 @@ async function webrequest(url, method, payload, headers, username, password) {
       response = await axios.put(url, payload, config);
     } else if (method === 'patch') {
       response = await axios.patch(url, payload, config);
+    } else if (method === 'delete') {
+      response = await axios.delete(url, config);
     } else {
       response = await axios.get(url, config);
     }
@@ -42,7 +44,14 @@ async function main() {
     const time = new Date().toTimeString();
 
     // http request to external API
-    const statusCode = await webrequest(url, method, payload, headers, username, password);
+    const statusCode = await webrequest(
+      url,
+      method,
+      payload,
+      headers,
+      username,
+      password
+    );
 
     const outputObject = {
       url,
@@ -55,12 +64,12 @@ async function main() {
     const consoleOutputJSON = JSON.stringify(outputObject, undefined, 2);
     console.log(consoleOutputJSON);
 
-    const outputJSON = JSON.stringify(outputObject);
-    core.setOutput('output', outputJSON);
-
-    // Get the JSON webhook payload for the event that triggered the workflow
-    // const githubContext = JSON.stringify(github.context.payload, undefined, 2);
-    // console.log(`githubContext: ${githubContext}`);
+    if (statusCode >= 400) {
+      core.setFailed(`HTTP request failed with status code: ${statusCode}`);
+    } else {
+      const outputJSON = JSON.stringify(outputObject);
+      core.setOutput('output', outputJSON);
+    }
   } catch (error) {
     core.setFailed(error.message);
   }
