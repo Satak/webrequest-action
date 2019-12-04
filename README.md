@@ -1,19 +1,10 @@
 # Web Request Action
 
-This action makes a web request to any JSON API. Supports all HTTP methods, JSON payload and basic authentication.
+> A GitHub Action to make a web request to any JSON API. Supports all HTTP methods, JSON payload and basic authentication.
 
-## Inputs
+[![Test Status](https://github.com/satak/webrequest-action/workflows/Test/badge.svg)](https://github.com/satak/webrequest-action/actions)
 
-| Parameter  | Required | Info                                               |
-| ---------- | -------- | -------------------------------------------------- |
-| `url`      | `true`   | Web request URL endpoint                           |
-| `method`   | `true`   | Web request method (`GET`, `POST`, `PUT`, `PATCH`) |
-| `payload`  | `false`  | Web request payload in JSON format                 |
-| `headers`  | `false`  | Web request headers in JSON format                 |
-| `username` | `false`  | Basic auth username                                |
-| `password` | `false`  | Basic auth password                                |
-
-## Example usage
+## Usage
 
 ```yaml
 uses: satak/webrequest-action@master
@@ -25,6 +16,17 @@ with:
   username: ${{ secrets.BASIC_AUTH_UN }}
   password: ${{ secrets.BASIC_AUTH_PW }}
 ```
+
+## Inputs
+
+| Parameter  | Required | Info                                               |
+| ---------- | -------- | -------------------------------------------------- |
+| `url`      | `true`   | Web request URL endpoint                           |
+| `method`   | `true`   | Web request method (`GET`, `POST`, `PUT`, `PATCH`) |
+| `payload`  | `false`  | Web request payload in JSON format                 |
+| `headers`  | `false`  | Web request headers in JSON format                 |
+| `username` | `false`  | Basic auth username                                |
+| `password` | `false`  | Basic auth password                                |
 
 ## Outputs
 
@@ -49,3 +51,7 @@ run: |
   $output = '${{ steps.webhook.outputs.output }}' | ConvertFrom-Json
   Write-Host "Time from output $($output.time) statusCode $($output.statusCode)"
 ```
+
+## License
+
+[MIT](LICENSE)

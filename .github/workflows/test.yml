@@ -1,8 +1,9 @@
 on: [push]
+name: Test
 env:
-  MY_NAME: Satak the great
+  MY_NAME: testUser
 jobs:
-  webhook_job:
+  webhook_test_job:
     runs-on: ubuntu-latest
     name: Job to send payload to webhook API
     steps:
@@ -23,3 +24,4 @@ jobs:
         run: |
           $output = '${{ steps.webhook.outputs.output }}' | ConvertFrom-Json
           Write-Host "Time from output $($output.time) statusCode $($output.statusCode)"
+          $output.statusCode -eq 200
