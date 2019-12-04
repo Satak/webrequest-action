@@ -2,10 +2,14 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const axios = require('axios');
 
-async function webhookCall(webhookId, payload) {
+async function webhookCall(webhookId, payload, username, password) {
   const url = `https://webhook.site/${webhookId}`;
+  const auth = username && password ? { username, password } : null;
+  const config = {
+    auth
+  };
   try {
-    const response = await axios.post(url, payload);
+    const response = await axios.post(url, payload, config);
     return response.status;
   } catch (error) {
     console.error(error);
@@ -17,12 +21,14 @@ async function main() {
     // inputs from action
     const webhookId = core.getInput('webhook-id');
     const payload = JSON.parse(core.getInput('payload'));
+    const username = core.getInput('username');
+    const password = core.getInput('password');
 
     // current time
     const time = new Date().toTimeString();
 
     // http POST request to external API
-    const statusCode = await webhookCall(webhookId, payload);
+    const statusCode = await webhookCall(webhookId, payload, username, password);
 
     const outputObject = {
       webhookId: webhookId,

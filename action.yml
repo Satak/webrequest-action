@@ -7,6 +7,12 @@ inputs:
   payload:
     description: Web request payload in JSON format
     required: true
+  username:
+    description: username for BASIC auth
+    required: false
+  password:
+    description: password for BASIC auth
+    required: false
 outputs:
   time:
     description: 'Time of execution'
