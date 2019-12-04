@@ -2,21 +2,20 @@ on: [push]
 env:
   MY_NAME: Satak the great
 jobs:
-  hello_world_job:
+  webhook_job:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: Job to send payload to webhook API
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Hello world action step
-        id: hello
+      - name: Webhook API request
+        id: webhook
         uses: satak/hello-action@master
         with:
           payload: '{"name": "${{ env.MY_NAME }}"}'
           webhook-id: ${{ secrets.WEBHOOK_ID }}
-      # Use the output from the `hello` step
-      - name: Get the output time
+      - name: Get the output
         shell: pwsh
         run: |
-          $output = '${{ steps.hello.outputs.output }}' | ConvertFrom-Json
+          $output = '${{ steps.webhook.outputs.output }}' | ConvertFrom-Json
           Write-Host "Time from output $($output.time) statusCode $($output.statusCode)"

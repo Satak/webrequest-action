@@ -6,7 +6,6 @@ async function webhookCall(webhookId, payload) {
   const url = `https://webhook.site/${webhookId}`;
   try {
     const response = await axios.post(url, payload);
-    console.log('Webhook statuscode:', response.status);
     return response.status;
   } catch (error) {
     console.error(error);
@@ -22,25 +21,25 @@ async function main() {
     // current time
     const time = new Date().toTimeString();
 
-    // http request to external API
+    // http POST request to external API
     const statusCode = await webhookCall(webhookId, payload);
 
-    const inputObject = {
+    const outputObject = {
       webhookId: webhookId,
       payload: payload,
       time: time,
       statusCode: statusCode
     };
 
-    const consoleOutputJSON = JSON.stringify(inputObject, undefined, 2);
+    const consoleOutputJSON = JSON.stringify(outputObject, undefined, 2);
     console.log(consoleOutputJSON);
 
-    const outputJSON = JSON.stringify(inputObject);
+    const outputJSON = JSON.stringify(outputObject);
     core.setOutput('output', outputJSON);
 
     // Get the JSON webhook payload for the event that triggered the workflow
-    // const payload = JSON.stringify(github.context.payload, undefined, 2);
-    // console.log(`The event payload: ${payload}`);
+    // const githubContext = JSON.stringify(github.context.payload, undefined, 2);
+    // console.log(`githubContext: ${githubContext}`);
   } catch (error) {
     core.setFailed(error.message);
   }
