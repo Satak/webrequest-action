@@ -14288,14 +14288,22 @@ const core = __webpack_require__(407);
 const github = __webpack_require__(323);
 const axios = __webpack_require__(82);
 
-async function webhookCall(webhookId, payload, username, password) {
-  const url = `https://webhook.site/${webhookId}`;
+async function webhookCall(url, method, payload, username, password) {
   const auth = username && password ? { username, password } : null;
   const config = {
     auth
   };
   try {
-    const response = await axios.post(url, payload, config);
+    let response = null;
+    if (method === 'post') {
+      response = await axios.post(url, payload, config);
+    } else if (method === 'put') {
+      response = await axios.put(url, payload, config);
+    } else if (method === 'patch') {
+      response = await axios.patch(url, payload, config);
+    } else {
+      response = await axios.get(url, config);
+    }
     return response.status;
   } catch (error) {
     console.error(error);
@@ -14305,8 +14313,11 @@ async function webhookCall(webhookId, payload, username, password) {
 async function main() {
   try {
     // inputs from action
-    const webhookId = core.getInput('webhook-id');
-    const payload = JSON.parse(core.getInput('payload'));
+    const url = core.getInput('url');
+    const methodInput = core.getInput('method');
+    const method = methodInput.toLowerCase();
+    const payloadInput = core.getInput('payload');
+    const payload = payloadInput ? JSON.parse(payloadInput) : null;
     const username = core.getInput('username');
     const password = core.getInput('password');
 
@@ -14314,10 +14325,10 @@ async function main() {
     const time = new Date().toTimeString();
 
     // http POST request to external API
-    const statusCode = await webhookCall(webhookId, payload, username, password);
+    const statusCode = await webhookCall(url, method, payload, username, password);
 
     const outputObject = {
-      webhookId: webhookId,
+      url: url,
       payload: payload,
       time: time,
       statusCode: statusCode

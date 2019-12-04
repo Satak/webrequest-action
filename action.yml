@@ -1,12 +1,16 @@
 name: 'Webhook Action'
 description: 'Send webhook'
 inputs:
-  webhook-id:
-    description: 'Unique webhook.site ID'
+  url:
+    description: 'Web request URL endpoint'
     required: true
+  method:
+    description: 'Web request method (`GET`, `POST`, `PUT`, `PATCH`)'
+    required: true
+    default: GET
   payload:
     description: Web request payload in JSON format
-    required: true
+    required: false
   username:
     description: username for BASIC auth
     required: false
