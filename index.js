@@ -2,7 +2,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const axios = require('axios');
 
-async function webhookCall(url, method, payload, username, password) {
+async function webrequest(url, method, payload, username, password) {
   const auth = username && password ? { username, password } : null;
   const config = {
     auth
@@ -38,14 +38,15 @@ async function main() {
     // current time
     const time = new Date().toTimeString();
 
-    // http POST request to external API
-    const statusCode = await webhookCall(url, method, payload, username, password);
+    // http request to external API
+    const statusCode = await webrequest(url, method, payload, username, password);
 
     const outputObject = {
-      url: url,
-      payload: payload,
-      time: time,
-      statusCode: statusCode
+      url,
+      method,
+      payload,
+      time,
+      statusCode
     };
 
     const consoleOutputJSON = JSON.stringify(outputObject, undefined, 2);

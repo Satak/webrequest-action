@@ -1,5 +1,5 @@
-name: 'Webhook Action'
-description: 'Send webhook'
+name: 'Web Request Action'
+description: 'Send Web Request'
 inputs:
   url:
     description: 'Web request URL endpoint'
