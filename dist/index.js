@@ -3247,6 +3247,8 @@ async function main() {
       username,
       password
     );
+
+    console.log('DEBUG', JSON.stringify(response, undefined, 2));
     const statusCode = response.status;
     // const data = response.data;
     const outputObject = {
