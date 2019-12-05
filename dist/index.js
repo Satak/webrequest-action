@@ -3248,16 +3248,15 @@ async function main() {
       password
     );
 
-    console.log('DEBUG', JSON.stringify(response, undefined, 2));
     const statusCode = response.status;
-    // const data = response.data;
+    const data = response.data;
     const outputObject = {
       url,
       method,
       payload,
       time,
       statusCode,
-      data: response.data
+      data
     };
 
     const consoleOutputJSON = JSON.stringify(outputObject, undefined, 2);
