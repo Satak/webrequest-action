@@ -3,14 +3,14 @@ name: Test
 env:
   MY_NAME: testUser
 jobs:
-  webhook_test_job:
+  webrequest_test:
     runs-on: ubuntu-latest
-    name: Job to send payload to webhook API
+    name: Test POST and GET web requests
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Webhook API request
-        id: webhook
+      - name: Webhook POST request
+        id: post-request
         uses: satak/webrequest-action@master
         with:
           url: https://webhook.site/${{ secrets.WEBHOOK_ID }}
@@ -19,9 +19,20 @@ jobs:
           headers: '{"Authentication": "${{ secrets.TOKEN }}"}'
           username: ${{ secrets.BASIC_AUTH_UN }}
           password: ${{ secrets.BASIC_AUTH_PW }}
-      - name: Get the output
+      - name: post-request output
         shell: pwsh
         run: |
-          $output = '${{ steps.webhook.outputs.output }}' | ConvertFrom-Json
+          $output = '${{ steps.post-request.outputs.output }}' | ConvertFrom-Json
           Write-Host "Time from output $($output.time) statusCode $($output.statusCode)"
           $output.statusCode -eq 200
+      - name: GET request
+        id: get-request
+        uses: satak/webrequest-action@master
+        with:
+          url: https://my-json-server.typicode.com/typicode/demo/posts
+          method: GET
+      - name: get-request output
+        shell: pwsh
+        run: |
+          $output = '${{ steps.get-request.outputs.output }}' | ConvertFrom-Json
+          $output.data[0].id -eq 1

@@ -25,8 +25,8 @@ inputs:
     description: password for BASIC auth
     required: false
 outputs:
-  time:
-    description: 'Time of execution'
+  output:
+    description: 'data output from the web request'
 runs:
   using: 'node12'
   main: 'dist/index.js'
