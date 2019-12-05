@@ -1,31 +1,5 @@
 const core = require('@actions/core');
-const github = require('@actions/github');
-const axios = require('axios');
-
-async function webrequest(url, method, payload, headers, username, password) {
-  const auth = username && password ? { username, password } : null;
-  const config = {
-    auth,
-    headers
-  };
-  try {
-    let response = null;
-    if (method === 'post') {
-      response = await axios.post(url, payload, config);
-    } else if (method === 'put') {
-      response = await axios.put(url, payload, config);
-    } else if (method === 'patch') {
-      response = await axios.patch(url, payload, config);
-    } else if (method === 'delete') {
-      response = await axios.delete(url, config);
-    } else {
-      response = await axios.get(url, config);
-    }
-    return response.status;
-  } catch (error) {
-    console.error(error);
-  }
-}
+const webrequest = require('./webrequest');
 
 async function main() {
   try {
@@ -44,7 +18,7 @@ async function main() {
     const time = new Date().toTimeString();
 
     // http request to external API
-    const statusCode = await webrequest(
+    const response = await webrequest(
       url,
       method,
       payload,
@@ -52,13 +26,15 @@ async function main() {
       username,
       password
     );
-
+    const statusCode = response.status;
+    const data = response.data;
     const outputObject = {
       url,
       method,
       payload,
       time,
-      statusCode
+      statusCode,
+      data
     };
 
     const consoleOutputJSON = JSON.stringify(outputObject, undefined, 2);

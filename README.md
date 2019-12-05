@@ -1,10 +1,21 @@
 # Web Request Action
 
-> A GitHub Action to make a web request to any JSON API. Supports all HTTP methods, JSON payload and basic authentication.
+> A GitHub Action to make a web request to any JSON API. Supports all HTTP methods, custom headers, JSON payload, data fetch and basic authentication.
 
 [![Test Status](https://github.com/satak/webrequest-action/workflows/Test/badge.svg)](https://github.com/satak/webrequest-action/actions)
 
 ## Usage
+
+### `GET` request
+
+```yaml
+uses: satak/webrequest-action@master
+with:
+  url: https://my-json-server.typicode.com/typicode/demo/posts
+  method: GET
+```
+
+### `POST` request with headers and basic auth
 
 ```yaml
 uses: satak/webrequest-action@master
@@ -39,7 +50,8 @@ Output format: `JSON`
     "method": "<str method>",
     "payload": {},
     "time": "<str time>",
-    "statusCode": "<int statusCode>"
+    "statusCode": "<int statusCode>",
+    "data": "object/array data from API"
   }
 }
 ```
@@ -49,7 +61,7 @@ Output format: `JSON`
 ```yaml
 run: |
   $output = '${{ steps.webhook.outputs.output }}' | ConvertFrom-Json
-  Write-Host "Time from output $($output.time) statusCode $($output.statusCode)"
+  Write-Host "Time from output $($output.time) statusCode $($output.statusCode) data $($output.data)"
 ```
 
 ## License
