@@ -3248,14 +3248,14 @@ async function main() {
       password
     );
     const statusCode = response.status;
-    const data = response.data;
+    // const data = response.data;
     const outputObject = {
       url,
       method,
       payload,
       time,
       statusCode,
-      data
+      data: response.data
     };
 
     const consoleOutputJSON = JSON.stringify(outputObject, undefined, 2);

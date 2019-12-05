@@ -22,7 +22,7 @@ jobs:
       - name: post-request output
         shell: pwsh
         run: |
-          $output = '${{ steps.webhook.outputs.output }}' | ConvertFrom-Json
+          $output = '${{ steps.post-request.outputs.output }}' | ConvertFrom-Json
           Write-Host "Time from output $($output.time) statusCode $($output.statusCode)"
           $output.statusCode -eq 200
       - name: GET request
