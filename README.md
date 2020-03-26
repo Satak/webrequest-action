@@ -3,6 +3,8 @@
 > A GitHub Action to make a web request to any JSON API. Supports all HTTP methods, custom headers, JSON payload, data fetch and basic authentication.
 
 [![Test Status](https://github.com/satak/webrequest-action/workflows/Test/badge.svg)](https://github.com/satak/webrequest-action/actions)
+![Release](https://img.shields.io/github/v/release/Satak/webrequest-action)
+
 
 ## Usage
 
