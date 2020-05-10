@@ -18,10 +18,10 @@
   },
   "homepage": "https://github.com/Satak/webrequest-action#readme",
   "dependencies": {
-    "@actions/core": "^1.2.0",
-    "axios": "^0.19.0"
+    "@actions/core": "^1.2.4",
+    "axios": "^0.19.2"
   },
   "devDependencies": {
-    "jest": "^24.9.0"
+    "jest": "^26.0.1"
   }
 }
