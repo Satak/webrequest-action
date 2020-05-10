@@ -1,6 +1,6 @@
 {
   "name": "webrequest-action",
-  "version": "1.0.0",
+  "version": "1.2.3",
   "description": "This action makes a web request to any JSON API. Supports all HTTP methods, JSON payload and basic authentication.",
   "main": "index.js",
   "scripts": {
