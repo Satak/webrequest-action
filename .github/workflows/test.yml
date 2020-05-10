@@ -15,16 +15,6 @@ jobs:
           node-version: '12.x'
       - run: npm install
       - run: npm test
-      - name: Webhook POST request
-        id: post-request
-        uses: satak/webrequest-action@master
-        with:
-          url: https://webhook.site/${{ secrets.WEBHOOK_ID }}
-          method: POST
-          payload: '{"name": "${{ env.MY_NAME }}"}'
-          headers: '{"Authentication": "${{ secrets.TOKEN }}"}'
-          username: ${{ secrets.BASIC_AUTH_UN }}
-          password: ${{ secrets.BASIC_AUTH_PW }}
       - name: post-request output
         shell: pwsh
         run: |
