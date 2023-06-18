@@ -10,9 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup Node for testing
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+        uses: actions/setup-node@master
       - run: npm install
       - run: npm test
       - name: post-request output
