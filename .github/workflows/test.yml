@@ -1,4 +1,4 @@
-on: [push]
+on: [push, wokflow_dispatch]
 name: Test
 env:
   MY_NAME: testUser
